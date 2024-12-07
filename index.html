@@ -1,1 +1,36 @@
-<h1>Hola desde </h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conectar datos desde un CSV</title>
+<style>
+/* Estilo básico para la tabla */
+table {
+width: 100%;
+border-collapse: collapse;
+}
+th, td {
+border: 1px solid #ccc;
+padding: 10px;
+text-align: left;
+}
+th {
+background-color: #f4f4f4;
+}
+</style>
+</head>
+<body>
+<h1>Cargar y visualizar datos de un CSV</h1>
+
+<!-- Input para subir el archivo CSV -->
+<input type="file" id="csvFile" accept=".csv">
+<button id="loadCsv">Cargar CSV</button>
+
+<!-- Contenedor para la tabla de datos -->
+<div id="tableContainer"></div>
+
+<script>
+// Seleccionar los elementos HTML
+const csvFileInput = document.getElementById('actividad1/productos.csv');
+const loadCsvButton = document.getElement
