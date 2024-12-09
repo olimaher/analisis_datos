@@ -3,34 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Conectar datos desde un CSV</title>
+<title>Scraping de datos de tarjetas graficas</title>
 <style>
 /* Estilo básico para la tabla */
 table {
-width: 100%;
-border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 th, td {
-border: 1px solid #ccc;
-padding: 10px;
-text-align: left;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
 }
 th {
-background-color: #f4f4f4;
+  background-color: #f4f4f4;
 }
 </style>
 </head>
 <body>
-<h1>Cargar y visualizar datos de un CSV</h1>
-
-<!-- Input para subir el archivo CSV -->
-<input type="file" id="csvFile" accept=".csv">
-<button id="loadCsv">Cargar CSV</button>
+<h1>Visualizar datos desde un archivo CSV</h1>
 
 <!-- Contenedor para la tabla de datos -->
 <div id="tableContainer"></div>
 
 <script>
-// Seleccionar los elementos HTML
-const csvFileInput = document.getElementById('actividad1/productos.csv');
-const loadCsvButton = document.getElement
+async function fetchAndDisplayCSV() {
+    try {
+        const response = await fetch('actividad1/productos.csv'); // Asegúrate de que esta ruta sea válida
+        const csvData = await response.text();
+        const rows = csvData.split('\n');
+        const tableContainer = document.getElementById('tableContainer');
+
+        // Crear la tabla
+        const table = document.createElement('table');
+        const headerRow = document.createElement('tr');
+
+        // Asume que la primera fila son los encabezados
+        const headers = rows[0].split(',');
+        headers.forEach(header => {
+            const th = document.createElement('th');
+            th.textContent = header.trim(); // Elimina espacios innecesarios
+            headerRow.appendChild(th);
+        });
+        table.appendChild(headerRow);
+
+        // Procesa las filas de datos
+        rows.slice(1).forEach(row => {
+            const dataRow = document.createElement('tr');
+            const columns = row.split(',');
+            columns.forEach(column => {
+                const td = document.createElement('td');
+                td.textContent = column.trim(); // Elimina espacios innecesarios
+                dataRow.appendChild(td);
+            });
+            table.appendChild(dataRow);
+        });
+
+        tableContainer.appendChild(table); // Añade la tabla al contenedor
+    } catch (error) {
+        console.error('Error al cargar el archivo CSV:', error);
+    }
+}
+
+fetchAndDisplayCSV();
+</script>
+
+</body>
+</html>
